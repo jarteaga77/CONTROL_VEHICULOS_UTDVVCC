@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="46061ae9-eb01-4bbb-8895-452842379cd6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idctrl" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT doc.archivo FROM consumo_combustible.control_combustible c JOIN consumo_combustible.doc_control_combustible doc ON doc.id_ctrl=c.ctrl_com_id
+WHERE c.ctrl_com_id=$P{idctrl}]]>
+	</queryString>
+	<field name="archivo" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="290">
+			<image scaleImage="RealSize" hAlign="Center" vAlign="Bottom">
+				<reportElement uuid="70bef789-120b-4cd8-95c5-a283d2fb424d" x="0" y="0" width="595" height="290"/>
+				<imageExpression><![CDATA[JRImageRenderer.getInstance((byte []) $F{archivo})]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="13">
+			<textField evaluationTime="Report">
+				<reportElement uuid="b4436e24-8b3b-4c25-8861-aa621fbdb2b9" x="315" y="0" width="40" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c2e43b42-2fbf-4c06-8e67-43cbd4297dfe" x="235" y="0" width="80" height="12"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pag "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

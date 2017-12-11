@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7d99a1a4-40c1-448e-83bf-a256388a3e9d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT n.id_notan, (m.descripcion ||' '|| y.year)AS fecha,  (' Placa: ' || ve.placa_identi ||' - '|| ma.descripcion ||' '|| li.descripcion)AS vehiculo,total_gal,total_ctrl,observaciones, us.nom_apell, n.fecha_tran
+FROM 
+consumo_combustible.no_tanqueo n JOIN utilidades.mes m ON n.id_mes=m.id_mes JOIN utilidades.year y ON n.id_year=y.id_year
+JOIN utilidades.vehiculos_equipos ve ON ve.id_vehiculo=n.id_vehiculo
+JOIN utilidades.linea_vehiculo li ON li.id_linea_vehi=ve.id_linea
+JOIN utilidades.marca_vehiculo ma ON ma.id_marca=li.id_marca
+JOIN utilidades.usuarios us ON us.id_usuario=n.id_usuario
+
+WHERE n.id_notan=$P{id}]]>
+	</queryString>
+	<field name="id_notan" class="java.lang.Integer"/>
+	<field name="fecha" class="java.lang.String"/>
+	<field name="vehiculo" class="java.lang.String"/>
+	<field name="total_gal" class="java.lang.Integer"/>
+	<field name="total_ctrl" class="java.lang.Integer"/>
+	<field name="observaciones" class="java.lang.String"/>
+	<field name="nom_apell" class="java.lang.String"/>
+	<field name="fecha_tran" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="143" splitType="Stretch">
+			<staticText>
+				<reportElement x="247" y="14" width="85" height="14" uuid="2afea337-49f7-4d05-80ce-b1b07c94e59c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[NIT. 830.059.605-1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="106" y="0" width="335" height="14" uuid="f88c6667-ad80-4b6b-a286-bd13d5b04ad2"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNION TEMPORAL DESARROLLO VIAL DEL VALLE DEL CAUCA Y CAUCA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="224" y="28" width="145" height="14" uuid="70deda8d-7f43-4b8b-b541-2ec56f893d8b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTROL DE NO TANQUEO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="74" width="78" height="12" uuid="60920e13-4a18-4b4f-b1bd-1f3490931fc8"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID NO TANQUEO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="74" width="100" height="12" uuid="9ff3f9ac-b168-4c53-897f-bdf9d41ce825"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_notan}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="209" y="74" width="97" height="12" uuid="71720474-f4ff-47a8-a3f0-272c148519f0"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VEHICULO / EQUIPO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="306" y="74" width="223" height="12" uuid="4f691e59-8118-4b0f-8df0-f8349e9cdabf"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vehiculo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="62" width="89" height="12" uuid="50e2daf4-fb18-44a6-9944-990192590179"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA REGISTRO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="62" width="100" height="12" uuid="8820a4fe-dc84-4896-82f7-351901b7aadb"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="86" width="100" height="12" uuid="f846871f-42c4-4591-bf74-5e145d5fc35a"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Total Combustible]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="101" y="86" width="100" height="12" uuid="d949d451-0a84-48d0-92b8-25c7c0801992"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_gal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="209" y="86" width="67" height="12" uuid="9937fddd-5b00-46ac-9062-3022ebca49d2"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Total Pesos $]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="306" y="86" width="100" height="12" uuid="c4fd4063-b6f7-43e1-a6c8-db848711624e"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_ctrl}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="1" y="115" width="554" height="24" uuid="0b3b9177-b5b1-4949-bb0b-e8712804eb62"/>
+				<textElement>
+					<font fontName="Arial" size="9" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{observaciones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="103" width="100" height="12" uuid="a07f60c8-9dc1-4498-b03e-dfe01896001c"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Observaciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="209" y="62" width="112" height="12" uuid="b118ee18-b28f-40ea-b90b-3f4e9e1692ee"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[FECHA ELABORACIÓN]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="315" y="62" width="100" height="12" uuid="7b80a7ff-2738-473c-9781-488b255df486"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_tran}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="417" y="62" width="69" height="12" uuid="6bd26b29-db2e-48ad-829a-b234098d077e"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[FECHA IMPRESIÓN]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="486" y="62" width="69" height="12" uuid="b00951ee-baaf-4016-828c-622f0fa5043d"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="14">
+			<textField evaluationTime="Report">
+				<reportElement x="304" y="2" width="40" height="12" uuid="4d674d37-1844-4209-9946-375aade2c50a"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="224" y="2" width="80" height="12" uuid="2753f7e8-baa2-441b-904b-c24aea509c7a"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pag "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="54" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="51" uuid="227b80fd-60b9-46ed-8a1f-9c2ff6fad00e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="44" height="12" uuid="3669c6b4-91b5-459a-918c-03ccc367f746"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Elaboró]]></text>
+			</staticText>
+			<line direction="BottomUp">
+				<reportElement x="163" y="0" width="1" height="51" uuid="0f0fcf38-022a-438c-8739-8809121f347c"/>
+			</line>
+			<staticText>
+				<reportElement x="164" y="0" width="49" height="12" uuid="57014ae8-b423-4a16-a2f2-d3a8cfed563e"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Revisó]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="0" width="113" height="14" uuid="4eff35f9-e664-4ae7-aee1-e70ad0e4d378"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nom_apell}]]></textFieldExpression>
+			</textField>
+			<line direction="BottomUp">
+				<reportElement x="368" y="0" width="1" height="51" uuid="4f4dafe5-6448-40bd-8aa7-7f02ac9fd6bf"/>
+			</line>
+			<staticText>
+				<reportElement x="368" y="0" width="49" height="12" uuid="63aab7b7-53ac-4d1d-bd4d-a3cd7fa8199f"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Autorizó]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

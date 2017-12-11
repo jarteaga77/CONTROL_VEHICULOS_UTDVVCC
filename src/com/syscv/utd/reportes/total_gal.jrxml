@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="216" pageHeight="72" columnWidth="216" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e68d39b7-cf66-4209-825a-31f6e6b9857d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_ctrl" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT estacion,t_gal_est FROM consumo_combustible.total_galones
+WHERE ctrl_com_id=$P{id_ctrl}]]>
+	</queryString>
+	<field name="estacion" class="java.lang.String"/>
+	<field name="t_gal_est" class="java.lang.Float"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="12" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="0" width="183" height="12" backcolor="#CCCCCC" uuid="c3af2d82-a335-417d-b1d0-06989690ed60"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="14" y="0" width="71" height="12" uuid="e474509e-f305-4036-a622-60fef53c03a5"/>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estación de servicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="0" width="49" height="12" uuid="78f89c50-a550-42a9-8594-9680efd4f3a8"/>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total EDS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField>
+				<reportElement x="14" y="0" width="97" height="12" uuid="c9d121a7-5fd8-4ab8-bba5-4f027d7c28e2"/>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estacion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="111" y="0" width="72" height="12" uuid="af09c64a-09b7-4a51-aa19-c8715b815747"/>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_gal_est}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

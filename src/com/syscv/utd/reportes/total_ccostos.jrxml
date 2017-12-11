@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="360" pageHeight="72" columnWidth="360" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="755df481-b122-4b23-8189-c3ecd91ec8b4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_ce" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT nom_ccosto,total_ccosto FROM consumo_combustible.total_ccostos_ce WHERE id_ce=$P{id_ce}]]>
+	</queryString>
+	<field name="nom_ccosto" class="java.lang.String"/>
+	<field name="total_ccosto" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="13">
+			<rectangle radius="10">
+				<reportElement x="0" y="0" width="360" height="13" backcolor="#CCCCCC" uuid="75f910c1-5545-4929-ab54-2ba33e161643"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="17" y="0" width="83" height="12" uuid="32d23f2c-439c-4405-a62d-318f1ba18c11"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Centro de Costos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="0" width="83" height="12" uuid="7212634d-0502-42f4-8c5e-c6210b488ef1"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="17" y="0" width="260" height="12" uuid="be535c43-055f-4b70-8909-5753004c47de"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nom_ccosto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="277" y="0" width="217" height="12" uuid="bc28b3fb-a6d9-48c0-83d3-af402b5f50e9"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_ccosto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

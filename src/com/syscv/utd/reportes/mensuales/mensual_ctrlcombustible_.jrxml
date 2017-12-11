@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7d99a1a4-40c1-448e-83bf-a256388a3e9d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="total_gal" class="JasperReport"/>
+	<parameter name="total_ccostos" class="JasperReport"/>
+	<queryString>
+		<![CDATA[SELECT inf.id, fecha_gen, us.nom_apell, (m.descripcion ||' '|| y.year) AS fecha,det.placa, det.dependencia, det.tipo_combustible, det.total_combustible, det.total_pesos, det.id_rc
+FROM informes_mensuales.mensual_ctrl inf 
+JOIN informes_mensuales.det_inf_mens det ON det.id_men_info=inf.id 
+JOIN utilidades.mes m ON m.id_mes=inf.mes 
+JOIN utilidades.year y ON y.id_year=inf.year 
+JOIN utilidades.usuarios  us ON  us.id_usuario=inf.id_usuario
+
+WHERE inf.id=$P{id}
+
+ORDER BY det.id_rc ASC]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="fecha_gen" class="java.sql.Timestamp"/>
+	<field name="nom_apell" class="java.lang.String"/>
+	<field name="fecha" class="java.lang.String"/>
+	<field name="placa" class="java.lang.String"/>
+	<field name="dependencia" class="java.lang.String"/>
+	<field name="tipo_combustible" class="java.lang.String"/>
+	<field name="total_combustible" class="java.lang.Float"/>
+	<field name="total_pesos" class="java.lang.Integer"/>
+	<field name="id_rc" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="9d4e66b5-f8dd-4bbb-9f23-e067131d09e2" x="0" y="56" width="572" height="24"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="0930c280-9d77-4623-81c3-077bebf37e8f" x="188" y="30" width="217" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORME MENSUAL VEHICULOS / EQUIPOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9bcef0a4-239a-452d-bfb3-7b2de8ee8074" x="254" y="16" width="85" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[NIT. 830.059.605-1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1ff796f6-13e7-4c5b-b472-f29217761b3e" x="113" y="2" width="335" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNION TEMPORAL DESARROLLO VIAL DEL VALLE DEL CAUCA Y CAUCA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a2d14837-4c53-42fd-ad4d-c848d37c5392" x="0" y="68" width="20" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="30ac3187-9e57-473f-9d70-144c5877281d" x="100" y="68" width="100" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="47dc7ea8-da2e-43d4-bfeb-3bfa32394394" x="0" y="56" width="100" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Elaboración]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement uuid="b89f5245-a933-48b2-9fda-e3021b8f975a" x="100" y="56" width="100" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_gen}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="21463378-1465-46e4-b963-5e2189f811d0" x="286" y="68" width="100" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Informe del Mes / Año]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="22e5ef80-2516-41b0-b630-e3854c4793dd" x="386" y="68" width="100" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<line direction="BottomUp">
+				<reportElement uuid="f791c456-cd6c-4c81-84f3-d24c0ff795fc" x="258" y="56" width="1" height="24"/>
+			</line>
+			<staticText>
+				<reportElement uuid="b6304c46-6a71-49bb-920b-5d034e06f38b" x="286" y="56" width="44" height="12"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Elaboró]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="0f208024-98c1-4ab2-b186-9f4a6eaf9d58" x="382" y="56" width="100" height="12"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nom_apell}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement uuid="7154b53a-d03a-4bbc-afd2-b003df2f430f" x="0" y="44" width="100" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement uuid="4181b939-9336-4795-9812-c6ab499fdd15" x="0" y="0" width="572" height="12" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="c9351d7a-a210-4330-a296-9a432585eb7f" x="70" y="0" width="30" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Placa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5ffd7dcb-2210-4a0e-a4f8-b6408d67ea50" x="167" y="0" width="91" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Centro de Costos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6ace40ac-6c48-4bd5-a2de-ef547f27c75b" x="281" y="0" width="85" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Combustible]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="26ead81f-b9de-4773-8691-ab9f2ad11e15" x="470" y="0" width="87" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Pesos COP $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b12857ee-6c76-446e-9bcb-432b5a95ae42" x="370" y="0" width="87" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Combustible]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="abd5f8e0-8352-4fae-a07b-934c80daaa47" x="20" y="0" width="30" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID RC]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="21a17a1e-d04d-4610-b11d-1c2c7630ec21" x="0" y="0" width="572" height="12" backcolor="#CCFFFF">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="6d6fc8ab-fdcf-4237-9ccf-948f8286689c" x="129" y="0" width="141" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dependencia}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="a3066309-f1bd-4a74-a954-176fd0d53d30" x="470" y="0" width="102" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_pesos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.000">
+				<reportElement uuid="bd4cca28-0ed4-4f2f-b02c-69b5fdc7ae08" x="370" y="0" width="87" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_combustible}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="009f1e8e-f370-4547-a6ee-f89bd38d6bba" x="281" y="0" width="69" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_combustible}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22104eaf-a181-4851-8d4f-ddc4f75d5c87" x="58" y="0" width="59" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{placa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2ff9ad4d-4695-4526-b644-3c15d238dcbb" x="10" y="0" width="40" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_rc}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="150" splitType="Stretch">
+			<subreport>
+				<reportElement uuid="5cbb87c1-f7b6-4fc6-8826-e3828ba106a3" x="0" y="0" width="572" height="49"/>
+				<subreportParameter name="id">
+					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{total_gal}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement uuid="7718913b-3cdd-4d73-b11c-f178f4c3134b" x="0" y="50" width="572" height="100"/>
+				<subreportParameter name="id">
+					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{total_ccostos}]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="576" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e68d39b7-cf66-4209-825a-31f6e6b9857d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT combustible, total_can,total_pesos FROM informes_mensuales.total_gal_inf_men WHERE id_men_inf=$P{id}]]>
+	</queryString>
+	<field name="combustible" class="java.lang.String"/>
+	<field name="total_can" class="java.lang.Float"/>
+	<field name="total_pesos" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="152" y="2" width="288" height="12" backcolor="#CCCCCC" uuid="52b347e2-5ef6-44f3-bd93-b9d37aa0464b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="173" y="2" width="51" height="12" uuid="2bfd1f40-21b7-4e31-9e8e-40f35cfb3d53"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Combustible]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="2" width="69" height="12" uuid="c9f1f35a-30f5-472c-862e-0c118cc39fda"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Combustible]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="2" width="72" height="12" uuid="bda3f881-f107-4a27-978f-b40ced71ec61"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Pesos COP $]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement x="162" y="2" width="87" height="12" uuid="5f5d22c2-e8bf-44e6-89ec-92b5e09e7e54"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{combustible}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.000">
+				<reportElement x="260" y="2" width="72" height="12" uuid="8437bfe0-4cf9-4706-808b-08b4383e4238"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_can}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="348" y="2" width="72" height="12" uuid="db72a84d-d30d-4f33-8833-f1049fa72840"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_pesos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

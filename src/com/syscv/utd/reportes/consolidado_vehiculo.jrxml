@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3f5d5c93-42ae-425b-bac4-ae04798a608a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_ce" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT SUM(d.cant_gal)AS total_gal,SUM (d.valor_total)AS total,(' Placa: ' ||ve.placa_identi)AS vehiculo, COUNT(ve.placa_identi) AS cantidad
+FROM consumo_combustible.det_con_eds d JOIN utilidades.vehiculos_equipos ve ON ve.id_vehiculo=d.id_vehiculo 
+
+
+WHERE d.id_ceds=$P{id_ce}
+
+GROUP BY ve.placa_identi
+ORDER BY ve.placa_identi]]>
+	</queryString>
+	<field name="total_gal" class="java.lang.Float"/>
+	<field name="total" class="java.lang.Long"/>
+	<field name="vehiculo" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.Long"/>
+	<variable name="total" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="14">
+			<staticText>
+				<reportElement x="174" y="0" width="211" height="14" uuid="78131192-adb5-4462-9335-0f3072071be6"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONSOLIDADO VEHICULOS / EQUIPOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="12" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="0" width="555" height="12" backcolor="#CCCCCC" uuid="ef359880-53da-427d-adec-e52ab475c1df"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="15" y="0" width="91" height="12" uuid="3bd99940-1943-4c11-97a9-25a42b283f12"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vehiculo / Equipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="138" y="0" width="92" height="12" uuid="80255795-83f8-4136-ac2e-f06f8cbfd4bf"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad Tanqueos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="0" width="56" height="12" uuid="9e336e9d-9344-4bec-8349-35d0ffa48138"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total (GL)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="0" width="77" height="12" uuid="6101fee8-3c32-4079-8b1a-9da090897b4c"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Pesos COP]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="12" backcolor="#CCFFFF" uuid="ca5e6f4c-0aa1-4df8-815f-bb75a5b850d8">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="15" y="0" width="106" height="12" uuid="ffe0b849-1def-4398-9f17-90330a4d32f6"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vehiculo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="169" y="0" width="61" height="12" uuid="e3238d79-4b3a-4ead-9d3c-c02b24f21dd0"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.000">
+				<reportElement x="293" y="0" width="108" height="12" uuid="9052dac0-fc1a-48a2-bf60-9fd87c096cc5"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_gal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="414" y="0" width="141" height="12" forecolor="#000000" uuid="f6f893bb-c743-44ca-8160-af6e640a24d3"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="15">
+			<rectangle>
+				<reportElement x="0" y="2" width="555" height="12" backcolor="#CCCCCC" uuid="7385e2c8-c668-48b4-a6e1-38dbb40bca86"/>
+			</rectangle>
+			<textField pattern="#,##0.00">
+				<reportElement x="414" y="2" width="100" height="12" uuid="7efead90-0bfd-4105-a87b-e2e5ff06155e"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="372" y="2" width="29" height="12" uuid="6e8c8359-40be-42a4-99d0-4c9de8c71aeb"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total$]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="576" pageHeight="576" columnWidth="576" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e68d39b7-cf66-4209-825a-31f6e6b9857d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT combustible, total_can,total_pesos FROM informes_mensuales.total_gal_men_eds WHERE id_men_inf=$P{id}]]>
+	</queryString>
+	<field name="combustible" class="java.lang.String"/>
+	<field name="total_can" class="java.lang.Integer"/>
+	<field name="total_pesos" class="java.lang.Integer"/>
+	<variable name="total" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_pesos}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="136" y="0" width="288" height="12" backcolor="#CCCCCC" uuid="52b347e2-5ef6-44f3-bd93-b9d37aa0464b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="157" y="0" width="51" height="12" uuid="2bfd1f40-21b7-4e31-9e8e-40f35cfb3d53"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Combustible]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="247" y="0" width="69" height="12" uuid="c9f1f35a-30f5-472c-862e-0c118cc39fda"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Combustible]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="332" y="0" width="72" height="12" uuid="bda3f881-f107-4a27-978f-b40ced71ec61"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Pesos COP $]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement x="146" y="0" width="87" height="12" uuid="5f5d22c2-e8bf-44e6-89ec-92b5e09e7e54"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{combustible}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.000">
+				<reportElement x="244" y="0" width="72" height="12" uuid="8437bfe0-4cf9-4706-808b-08b4383e4238"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_can}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="332" y="0" width="92" height="12" uuid="db72a84d-d30d-4f33-8833-f1049fa72840"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_pesos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="522">
+			<rectangle>
+				<reportElement x="136" y="0" width="288" height="12" backcolor="#CCCCCC" uuid="d1f036e8-adea-4a21-b6c1-6572d2d6f62a"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="136" y="0" width="100" height="12" uuid="92fb83d9-dd7a-44e0-b10c-2ec6f3537714"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Mantenimiento]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="324" y="0" width="100" height="12" uuid="cb981831-8756-40ee-a0c4-f9b237223446"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<bar3DChart>
+				<chart>
+					<reportElement x="0" y="22" width="576" height="237" uuid="8e28e138-2ea8-483d-99e9-ff021965bc0f"/>
+					<chartTitle>
+						<font fontName="Arial" size="8"/>
+						<titleExpression><![CDATA["Cantidad de Combustible Vendido"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle/>
+					<chartLegend>
+						<font fontName="Arial" size="8"/>
+					</chartLegend>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{combustible}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{combustible}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{total_can}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel>
+						<font fontName="Arial" size="8"/>
+					</itemLabel>
+					<categoryAxisFormat>
+						<axisFormat>
+							<labelFont>
+								<font fontName="Arial" size="8"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="Arial" size="8"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat>
+							<labelFont>
+								<font fontName="Arial" size="8"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="Arial" size="8"/>
+							</tickLabelFont>
+						</axisFormat>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+			<bar3DChart>
+				<chart>
+					<reportElement x="0" y="271" width="576" height="251" uuid="beb9c157-58a1-42a2-a931-efa98ca637fe"/>
+					<chartTitle>
+						<font fontName="Arial" size="8"/>
+						<titleExpression><![CDATA["Total Pesos por Venta de tipo de Combustible"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle>
+						<font fontName="Arial" size="8"/>
+					</chartSubtitle>
+					<chartLegend>
+						<font fontName="Arial" size="8"/>
+					</chartLegend>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{combustible}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{combustible}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{total_pesos}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel>
+						<font fontName="Arial" size="8"/>
+					</itemLabel>
+					<categoryAxisFormat>
+						<axisFormat>
+							<labelFont>
+								<font fontName="Arial" size="8"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="Arial" size="8"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat>
+							<labelFont>
+								<font fontName="Arial" size="8"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="Arial" size="8"/>
+							</tickLabelFont>
+						</axisFormat>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+		</band>
+	</summary>
+</jasperReport>
